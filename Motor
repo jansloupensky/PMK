@@ -1,1 +1,79 @@
+Include "ez8.inc"
+Vector Reset=zacatek
+org %100
+zacatek:
+SRP #%00
+LDX SPL,#%FF
+LDX SPH,#%00
+LDX PAADDR,#%01
+LDX PACTL,#%00
+LDX R11,#%11
+toc3:
+LDX R12,#%40
+toc1:
+LDX PAOUT,R11
+RL R11
 
+CALL cekej
+DEC R12
+JP nz,toc1
+
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+
+LDX R12,#%20
+toc2:
+LDX PAOUT,R11
+RR R11
+
+CALL cekej
+DEC R12
+JP nz,toc2
+
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+CALL cekej
+
+JP toc3
+cekej:
+LDX R0,#%03
+
+CLR R1
+CLR R2
+hopsem:
+DEC R2
+JR nz,hopsem
+
+DEC R1
+JR nz,hopsem
+
+DEC R0
+JR nz,hopsem
+
+RET
+
+
+
+
+
+
+
+note:CALL cekej záleží na počtu čárek, když 4 tak čtyři na vteřinu, když 5 tak pět na vteřinu
+
+
+#%20 jedno otočení

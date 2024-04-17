@@ -1,1 +1,90 @@
-
+INCLUDE "ez8.Inc"
+ 
+VECTOR Reset=zacatek
+ 
+org %100
+ 
+zacatek:
+SRP #%00
+LDX SPL,#%FF
+LDX SPH,#%00
+ 
+LDX PAADDR,#%01
+LDX PACTL,#%00
+ 
+LDX PBADDR,#%01
+LDX PBCTL,#%00
+ 
+ 
+LDX R11,#%11
+LDX R12,#%12
+skokhlavni:
+ 
+LDX R5,#%38
+LDX R6,#%30
+LDX R7,#%39
+LDX R8,#%76
+ 
+LDX R12,#%C0
+skok11:
+LDX PAOUT,R5
+LDX PBOUT,#%01
+CALL malejcekej
+ 
+LDX PAOUT,R6
+LDX PBOUT,#%02
+CALL malejcekej
+ 
+LDX PAOUT,R7
+LDX PBOUT,#%04
+CALL malejcekej
+ 
+LDX PAOUT,R8
+LDX PBOUT,#%08
+CALL malejcekej
+ 
+DEC R12
+JP nz,skok11
+ 
+CLR R12
+ 
+LDX R5,#%71
+LDX R6,#%50
+LDX R7,#%77
+LDX R8,#%54
+ 
+LDX R12,#%C0
+ 
+skok12:
+LDX PAOUT,R5
+LDX PBOUT,#%01
+CALL malejcekej
+ 
+LDX PAOUT,R6
+LDX PBOUT,#%02
+CALL malejcekej
+ 
+LDX PAOUT,R7
+LDX PBOUT,#%04
+CALL malejcekej
+ 
+LDX PAOUT,R8
+LDX PBOUT,#%08
+CALL malejcekej
+ 
+DEC R12
+JP nz,skok12
+JP skokhlavni
+malejcekej:
+LDX R0,#%04
+CLR R1
+ 
+hopsem:
+ 
+DEC R1
+JR nz,hopsem
+ 
+DEC R0
+JR nz,hopsem
+ 
+RET
